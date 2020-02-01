@@ -80,3 +80,20 @@ exports.CheckExistance = function(req, res)
     .then(room => res.send(room))
 }
 
+exports.getAllUsers = function(req,  res)
+{
+    dbConnect.dbConnect(function(err, connection)
+    {
+        connection.collection("accounts").find({}).toArray((err, items) =>
+        {
+            if(err){
+                res.send(err)
+            }
+            else
+            {
+                res.send(items)
+            }
+        })
+    })
+}
+

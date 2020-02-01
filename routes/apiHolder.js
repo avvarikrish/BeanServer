@@ -12,17 +12,22 @@ router.get("/", function(req, res)
 
 router.post("/accounts" ,function(req, res)
 {
-    dbMod.CreateAccount(req, function(err, send)
+    if(req.query.username != null && req.query.password != null)
     {
-        if (err)
+        dbMod.CreateAccount(req, function(err, send)
         {
-            res.send(err)
+            if (err)
+            {
+                res.send(err)
+                
+            }else{
+                res.send(send)
+            }
             
-        }else{
-            res.send(send)
-        }
-        
-    });
+        });
+    }else{
+        res.send("inccorrect params")
+    }
 })
 
 router.get("/login", function(req, res)
@@ -46,4 +51,9 @@ router.post("/addroom", function(req, res)
 router.get("/exists", function(req, res)
 {
     dbMod.CheckExistance(req,res)
+})
+
+router.get("/getallusers", function(req, res)
+{
+    dbMod.getAllUsers(req, res)
 })
