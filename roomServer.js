@@ -3,7 +3,6 @@
 
 //The typical utilities required for having things working
 const fs = require('fs');
-const https = require('https');
 const http = require('http');
 const path = require('path');
 const express = require('express');
@@ -18,14 +17,9 @@ prepareCleanTermination()
 
 //Load launch options from command line
 var protocol = process.argv[3];
-if (!protocol || (protocol != 'http' && protocol != 'https')) {
-  protocol = 'http';
-}
+
 
 var port = parseInt(process.argv[4]);
-if (!port || port < 1 || port > 65535) {
-  port = protocol == 'https' ? 8443 : 8080;
-}
 
 //Set up our web server
 var app = express();
@@ -34,15 +28,7 @@ app.use("/", express.static(publicpath));
 
 var server;
 
-if (protocol == 'https') {
-  var httpsOptions = {
-    key: fs.readFileSync('keys/server.key'),
-    cert: fs.readFileSync('keys/server.crt')
-  };
-  server = https.createServer(httpsOptions, app);
-} else {
-  server = http.createServer(app);
-}
+server = http.createServer(app);
 
 server.listen(port, function() {
   console.log("Express server listening for " + protocol + " on *:" + port);
