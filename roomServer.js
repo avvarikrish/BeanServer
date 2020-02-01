@@ -6,6 +6,12 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser')
+const MongoClient = require('mongodb').MongoClient;
+const cors = require('cors');
+const db = "mongodb://localhost:27017/beandb"
+
+const post = 8000
 
 //Load configuration from .env config file
 require('dotenv').load();
@@ -23,9 +29,13 @@ var port = parseInt(process.argv[4]);
 
 //Set up our web server
 var app = express();
+
+
 var publicpath = path.join(__dirname, "./public");
 app.use("/", express.static(publicpath));
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors({origin: '*'}));
 var server;
 
 server = http.createServer(app);
