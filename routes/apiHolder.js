@@ -57,3 +57,8 @@ router.get("/getallusers", function(req, res)
 {
     dbMod.getAllUsers(req, res)
 })
+
+router.get("/getallirooms", function(req, res)
+{
+    dbMod.getAllInCompleteRooms(req, res)
+})

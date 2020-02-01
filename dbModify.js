@@ -97,3 +97,10 @@ exports.getAllUsers = function(req,  res)
     })
 }
 
+exports.getAllInCompleteRooms = function(req, res)
+{
+    client.video.rooms
+        .list({status:"in-progress"})
+        .then(rooms =>  res.send(rooms))
+        .catch(error => res.send(error))
+}
