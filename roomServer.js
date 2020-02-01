@@ -50,9 +50,6 @@ const client = new Twilio(API_KEY_SID, API_KEY_SECRET, {
 
 var roomSid;
 var roomName = process.argv[2];
-if (!roomName) {
-  roomName = randomstring.generate(10);
-}
 
 
 console.log('Trying to create room ' + roomName);
