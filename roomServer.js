@@ -95,8 +95,6 @@ io.on('connection', function(socket) {
     var userName;
     if (msg && msg.userName) {
       userName = msg.userName;
-    } else {
-      userName = randomstring.generate(20);
     }
 
     var accessToken = new AccessToken(
@@ -108,12 +106,12 @@ io.on('connection', function(socket) {
     accessToken.identity = userName;
 
     var grant = new VideoGrant();
-    grant.room = roomName;
+    grant.room = msg.roomName;
     accessToken.addGrant(grant);
 
     var answer = {
       jwtToken: accessToken.toJwt(),
-      roomName: roomName
+      roomName: msg.roomName
     }
 
     console.log("JWT accessToken generated: " + accessToken.toJwt() + "\n");
