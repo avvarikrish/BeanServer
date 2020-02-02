@@ -40,6 +40,7 @@ router.get("/login", function(req, res)
         {
             res.send(err)
         }else{
+            console.log(send)
             if (send = "")
             {
                 res.send(null)
