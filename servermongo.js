@@ -29,40 +29,40 @@ var io = require('socket.io')(server);
 var AccessToken = Twilio.jwt.AccessToken;
 var VideoGrant = AccessToken.VideoGrant;
 
-io.on('connection', function(socket) {
+// io.on('connection', function(socket) {
 
-  //Client ask for an AccessToken. Generate a random identity and provide it.
-  socket.on('getAccessToken', function(msg) {
+//   //Client ask for an AccessToken. Generate a random identity and provide it.
+//   socket.on('getAccessToken', function(msg) {
 
-    console.log("getAccessToken request received");
+//     console.log("getAccessToken request received");
 
-    var userName;
-    if (msg && msg.userName) {
-      userName = msg.userName;
-    }
+//     var userName;
+//     if (msg && msg.userName) {
+//       userName = msg.userName;
+//     }
 
-    var accessToken = new AccessToken(
-      ACCOUNT_SID,
-      API_KEY_SID,
-      API_KEY_SECRET
-    );
+//     var accessToken = new AccessToken(
+//       ACCOUNT_SID,
+//       API_KEY_SID,
+//       API_KEY_SECRET
+//     );
 
-    accessToken.identity = userName;
+//     accessToken.identity = userName;
 
-    var grant = new VideoGrant();
-    grant.room = msg.roomName;
-    accessToken.addGrant(grant);
+//     var grant = new VideoGrant();
+//     grant.room = msg.roomName;
+//     accessToken.addGrant(grant);
 
-    var answer = {
-      jwtToken: accessToken.toJwt(),
-      roomName: msg.roomName
-    }
+//     var answer = {
+//       jwtToken: accessToken.toJwt(),
+//       roomName: msg.roomName
+//     }
 
-    console.log("JWT accessToken generated: " + accessToken.toJwt() + "\n");
+//     console.log("JWT accessToken generated: " + accessToken.toJwt() + "\n");
 
-    socket.emit("accessToken", answer);
-  });
-});
+//     socket.emit("accessToken", answer);
+//   });
+// });
 
 
 // MongoClient.connect(db, (err, database) => {
