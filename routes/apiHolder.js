@@ -33,6 +33,7 @@ router.post("/login" ,function(req, res)
 
 router.get("/login", function(req, res)
 {
+    console.log(req)
     dbMod.Login(req,function(err, send)
     {
         console.log(send)
