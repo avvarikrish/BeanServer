@@ -131,7 +131,7 @@ exports.sendToken = function(req, res)
 exports.getParticipants = function(req, res)
 {
     client.video.rooms(req.query.roomName).participants
-        .each({status:"complete"}, (part) => console.log(part))
+        .each({status:"complete"}, (part) => {console.log(part.sid)})
 }
 
 exports.getRecording = function(req, res)
