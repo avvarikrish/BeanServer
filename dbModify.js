@@ -4,6 +4,7 @@ const ACCOUNT_SID = process.env.ACCOUNT_SID; //Get yours here: https://www.twili
 const API_KEY_SID = process.env.API_KEY_SID; //Get yours here: https://www.twilio.com/console/video/dev-tools/api-keys
 const API_KEY_SECRET = process.env.API_KEY_SECRET; //Get yours here: https://www.twilio.com/console/video/dev-tools/api-keys
 const Twilio = require('twilio');
+const random = require('randomstring');
 
 const client = new Twilio(API_KEY_SID, API_KEY_SECRET, {
   accountSid: ACCOUNT_SID
@@ -104,4 +105,25 @@ exports.getAllInCompleteRooms = function(req, res)
         .list({status:"in-progress"})
         .then(rooms =>  res.send(rooms))
         .catch(error => res.send(error))
+}
+
+exports.sendToken = function(req, res)
+{
+    var AccessToken = Twilio.jwt.AccessToken
+    var VideoGrant = AccessToken.VideoGrant
+    var token = new AccessToken(
+        ACCOUNT_SID,
+        API_KEY_SID,
+        API_KEY_SECRET
+    )
+
+    token.identity = random.generate(20)
+    var grant = new VideoGrant()
+    grant.room = req.query.roomName
+    token.addGrant(grant) 
+
+    res.send({
+        identity: token.identity,
+        token: token.toJwt()
+    })
 }

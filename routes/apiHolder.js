@@ -68,3 +68,7 @@ router.get("/getallirooms", function(req, res)
 {
     dbMod.getAllInCompleteRooms(req, res)
 })
+
+router.get("/token", function(req, res){
+    dbMod.sendToken(req,res)
+})
