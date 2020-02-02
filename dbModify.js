@@ -130,7 +130,8 @@ exports.sendToken = function(req, res)
 
 exports.getParticipants = function(req, res)
 {
-    res.send(JSON.stringify(client.video.rooms(req.query.roomName).participants))
+    client.video.rooms(req.query.roomName).participants
+        .each({status:"complete"}, (part) => console.log(part))
 }
 
 exports.getRecording = function(req, res)
