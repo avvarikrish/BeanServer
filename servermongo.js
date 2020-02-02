@@ -20,7 +20,7 @@ server = http.createServer(app);
 const port = 8000;
 
 
-server.listen(port, () => {
+app.listen(port, () => {
     console.log('We are on port ' + port);
 
 
