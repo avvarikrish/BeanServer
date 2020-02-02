@@ -7,12 +7,15 @@ const http = require('http');
 const Twilio = require('twilio');
 
 
-server = http.createServer(app);
+
 
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(accountRoute)
 app.use(cors({origin: '*'}));
+
+
+server = http.createServer(app);
 
 const port = 8000;
 
