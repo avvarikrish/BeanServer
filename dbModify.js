@@ -38,6 +38,7 @@ exports.Login = function(req, callback)
         username: req.query.username,
         password: req.query.password
     }
+    console.log(userQuery)
     dbConnect.dbConnect(function(err, connection)
     {
         connection.collection('accounts').findOne(userQuery, (err, item) => {
