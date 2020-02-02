@@ -13,7 +13,7 @@ router.get("/", function(req, res)
 router.post("/accounts" ,function(req, res)
 {
     console.log(req)
-    if(req.query.username != null && req.query.password != null)
+    if(req.body.username != null && req.body.password != null)
     {
         dbMod.CreateAccount(req, function(err, send)
         {

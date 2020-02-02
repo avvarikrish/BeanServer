@@ -16,8 +16,8 @@ exports.CreateAccount = function(req, callback)
     console.log(req.originalUrl)
     var reg = 
     {
-        username: req.query.username,
-        password: req.query.password
+        username: req.body.username,
+        password: req.body.password
     }
     dbConnect.dbConnect(function(err, connection)
     {
@@ -35,8 +35,8 @@ exports.Login = function(req, callback)
 {
     var userQuery = {
 
-        username: req.query.username,
-        password: req.query.password
+        username: req.body.username,
+        password: req.body.password
     }
     dbConnect.dbConnect(function(err, connection)
     {
@@ -55,7 +55,7 @@ exports.AddRoom = function(req, res)
     client.video.rooms
     .create({
         type: 'group-small',
-        uniqueName: req.query.roomName,
+        uniqueName: req.body.roomName,
         recordParticipantsOnConnect: true
     })
     .then(room => {
@@ -75,7 +75,7 @@ exports.AddRoom = function(req, res)
 
 exports.CheckExistance = function(req, res)
 {
-    client.video.rooms(req.query.roomName)
+    client.video.rooms(req.body.roomName)
     .fetch()
     .then(room => res.send(room))
 }
