@@ -132,3 +132,16 @@ exports.getParticipants = function(req, res)
 {
     res.send(JSON.stringify(client.video.rooms(req.query.roomName).participants))
 }
+
+exports.getRecording = function(req, res)
+{
+    toSend = []
+
+    client.video.recordings.list({
+        groupingSid: [req.query.roomName],
+        limit:20
+    })
+    .then(recordings => recordings.forEach(r => toSend.push(r)))
+    console.log(toSend)
+    res.send(toSend)
+}

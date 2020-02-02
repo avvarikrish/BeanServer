@@ -76,3 +76,8 @@ router.get("/token", function(req, res){
 router.get("/allparticipants", function(req, res){
     dbMod.getParticipants(req, res)
 })
+
+router.get("/getrecordings", function(req, res)
+{
+    dbMod.getRecording(req, res)
+})
