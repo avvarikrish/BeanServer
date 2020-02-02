@@ -11,7 +11,7 @@ const Twilio = require('twilio');
 
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors({origin: '*'}));
+app.use(cors({origin: '*', methods: '*'}));
 app.use(accountRoute)
 
 
