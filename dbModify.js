@@ -35,8 +35,8 @@ exports.Login = function(req, callback)
 {
     var userQuery = {
 
-        username: req.body.username,
-        password: req.body.password
+        username: req.query.username,
+        password: req.query.password
     }
     dbConnect.dbConnect(function(err, connection)
     {
@@ -75,7 +75,7 @@ exports.AddRoom = function(req, res)
 
 exports.CheckExistance = function(req, res)
 {
-    client.video.rooms(req.body.roomName)
+    client.video.rooms(req.query.roomName)
     .fetch()
     .then(room => res.send(room))
 }
