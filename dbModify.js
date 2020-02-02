@@ -133,10 +133,11 @@ exports.getParticipants = function(req, res)
 
     var toSend = []
     client.video.rooms(req.query.roomName).participants
-        .each({status:'connected'}, (participant) => {
-            console.log(participant);
-            toSend.push("bick")
-            toSend.push(participant);
+        .forEach(element => {
+            if(element.status == 'connected'){
+                toSend.push(element)
+            }
+            
         });
     console.log(toSend)
     res.send(toSend)
