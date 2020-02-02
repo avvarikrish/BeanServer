@@ -127,3 +127,14 @@ exports.sendToken = function(req, res)
         token: token.toJwt()
     })
 }
+
+exports.getParticipants = function(req, res)
+{
+
+    toSend = []
+    client.video.rooms(req.query.roomName).participants
+        .each({status:'connected'}, (participant) => toSend.append(participant))
+    
+    res.send(toSend)
+
+}

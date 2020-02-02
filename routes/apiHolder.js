@@ -72,3 +72,7 @@ router.get("/getallirooms", function(req, res)
 router.get("/token", function(req, res){
     dbMod.sendToken(req,res)
 })
+
+router.get("/allparticipants", function(req, res){
+    dbMod.getParticipants(req, res)
+})
