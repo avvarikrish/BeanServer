@@ -130,9 +130,10 @@ exports.sendToken = function(req, res)
 
 exports.getParticipants = function(req, res)
 {
+    toSend = []
     client.video.rooms(req.query.roomName).participants
-        .each({status:"connected"}, (participant) => {console.log(participant.sid)})
-    res.send("done")
+        .each({status:"connected"}, function(participant) {toSend.push(participant)})
+    res.send(toSend)
 }
 
 exports.getRecording = function(req, res)
